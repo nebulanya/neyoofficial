@@ -125,12 +125,12 @@
     <script>
       
        const urlParams = new URLSearchParams(window.location.search);
-       const orderId = urlParams.get('order-id') || "";
+       const orderId = urlParams.get('orderId') || "";
        const date = urlParams.get('date') || "";
-       const customerName = urlParams.get('customer-name') || "";
+       const customerName = urlParams.get('customerName') || "";
        const phone = urlParams.get('phone') || "";
        const destination = urlParams.get('destination') || "";
-       const totalCost = urlParams.get('total-cost') || "0";
+       const totalCost = urlParams.get('totalCost') || "0";
        const fileName = urlParams.get('fileName') || "";
 
        document.getElementById('order-id').innerText = orderId;
