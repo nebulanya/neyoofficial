@@ -39,9 +39,15 @@
             width: 100%;
             border-collapse: collapse;
         }
-        .info-table td {
+        .info-table div {
             padding: 3px 0;
             vertical-align: top;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
         }
         .label {
             font-weight: bold;
@@ -86,31 +92,26 @@
             <div class="invoice-title">Invoice</div>
         </div>
         
-        <table class="info-table">
-             <tr>
-                <td class="label">Order ID</td>
-                <td id="orderId">: N/A</td>
-            </tr>
-            <tr>
-                <td class="label">Date</td>
-                <td id="date">: N/A</td>
-            </tr>
-            <tr>
-                <td class="label">Customer Name</td>
-                <td id="customerName">: N/A</td>
-            </tr>
-            <tr>
-                <td class="label">Phone</td>
-                <td id="phone">: N/A</td>
-            </tr>
-            <tr>
-                <td class="label">Destination</td>
-                <td id="destination">: N/A</td>
-            </tr>
-        </table>
+        <div class="info-table">
+             <div class="label-row">
+                <span class="label">Order ID</span><span>: <span id="order-id"></span></span>
+            </div>
+            <div class="label-row">
+                <span class="label">Date</span><span>: <span id="date"></span></span>
+            </div>
+    
+            <div class="label-row">
+                <span class="label">Customer Name</span><span>: <span id="customer-name"></span></span>
+            </div>
+            <div class="label-row">
+                <span class="label">Phone</span><span>: <span id="phone"></span></span>
+            </div>
+            <div class="label-row">
+                <span class="label">Destination</span><span>: <span id="destination"></span></span>
+            </div>
+        </div>
 
-        <div class="total-section" id="totalCost">
-            N/A
+        <div class="total-section" id="total-cost">
         </div>
         <div class="button-group">
             <button class="button" onclick="window.print()">Invoice</button>
@@ -118,25 +119,22 @@
     </div>
 
     <script>
-        window.onload = function() {
-            window.print();
-        };
-
+      
        const urlParams = new URLSearchParams(window.location.search);
-       const orderId = urlParams.get('order-id') || "N/A";
-       const date = urlParams.get('date') || "N/A";
-       const customerName = urlParams.get('customer-name') || "N/A";
-       const phone = urlParams.get('phone') || "N/A";
-       const destination = urlParams.get('destination') || "N/A";
-       const totalCost = urlParams.get('total-cost') || "0";
+       const orderId = urlParams.get('orderId') || "";
+       const date = urlParams.get('date') || "";
+       const customerName = urlParams.get('customerName') || "";
+       const phone = urlParams.get('phone') || "";
+       const destination = urlParams.get('destination') || "";
+       const totalCost = urlParams.get('totalCost') || "0";
        const fileName = urlParams.get('fileName') || "";
 
-       document.getElementById('orderId').innerText = orderId;
+       document.getElementById('order-id').innerText = orderId;
        document.getElementById('date').innerText = date;
-       document.getElementById('customerName').innerText = customerName;
+       document.getElementById('customer-name').innerText = customerName;
        document.getElementById('phone').innerText = phone;
        document.getElementById('destination').innerText = destination;
-       document.getElementById('totalCost').innerText = "Total Cost: Rp " + totalCost;
+       document.getElementById('total-cost').innerText = "Total Cost: Rp " + totalCost;
 
        if (fileName) document.title = fileName;
 
