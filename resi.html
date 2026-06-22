@@ -91,6 +91,29 @@
                 display: none;
             }
         }
+
+        /* Pengaturan untuk perangkat mobile dengan lebar maks 732px */
+@media screen and (max-width: 732px) {
+    body {
+        width: 100%; /* Agar full di layar mobile */
+        padding: 5px;
+    }
+    
+    .container {
+        width: 95%; /* Sedikit margin di sisi kanan kiri */
+        margin: 0 auto;
+    }
+
+    .label-row {
+        /* Opsional: memperkecil lebar label di mobile agar tidak terpotong */
+        grid-template-columns: 80px 10px 1fr; 
+        font-size: 11px; /* Sedikit memperkecil font agar muat */
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+}
     
         
     </style>
