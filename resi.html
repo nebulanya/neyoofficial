@@ -88,29 +88,29 @@
         
         <table class="info-table">
              <tr>
-                <td class="label" id="order-id">Order ID</td>
-                <td>: 22 Juni 2026</td>
+                <td class="label">Order ID</td>
+                <td id="orderId">: N/A</td>
             </tr>
             <tr>
-                <td class="label" id="date">Date</td>
-                <td>: 22 Juni 2026</td>
+                <td class="label">Date</td>
+                <td id="date">: N/A</td>
             </tr>
             <tr>
-                <td class="label" id="customer-name">Customer Name</td>
-                <td>: Budi Santoso</td>
+                <td class="label">Customer Name</td>
+                <td id="customerName">: N/A</td>
             </tr>
             <tr>
-                <td class="label" id="phone">Phone</td>
-                <td>: 08123456789</td>
+                <td class="label">Phone</td>
+                <td id="phone">: N/A</td>
             </tr>
             <tr>
-                <td class="label" id="destination">Destination</td>
-                <td>: Jl. Merdeka No. 1, Jakarta</td>
+                <td class="label">Destination</td>
+                <td id="destination">: N/A</td>
             </tr>
         </table>
 
-        <div class="total-section" id="total-cost">
-            Total Cost: Rp 150.000
+        <div class="total-section" id="totalCost">
+            N/A
         </div>
         <div class="button-group">
             <button class="button" onclick="window.print()">Invoice</button>
@@ -131,12 +131,12 @@
        const totalCost = urlParams.get('total-cost') || "0";
        const fileName = urlParams.get('fileName') || "";
 
-       document.getElementById('order-id').innerText = orderId;
+       document.getElementById('orderId').innerText = orderId;
        document.getElementById('date').innerText = date;
-       document.getElementById('customer-name').innerText = customerName;
+       document.getElementById('customerName').innerText = customerName;
        document.getElementById('phone').innerText = phone;
        document.getElementById('destination').innerText = destination;
-       document.getElementById('total-cost').innerText = "Total Cost: Rp " + totalCost;
+       document.getElementById('totalCost').innerText = "Total Cost: Rp " + totalCost;
 
        if (fileName) document.title = fileName;
 
