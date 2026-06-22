@@ -45,14 +45,17 @@
         }
 
         .label-row {
-            display: flex;
-            justify-content: flex-start;
+            display: grid;
+            grid-template-columns: 100px 5px 1fr; /* 90px untuk lebar label, 5px untuk titik dua, sisanya untuk konten */
+            align-items: start;
             padding: 3px 0;
-            gap: 0.5%;
         }
         .label {
             font-weight: bold;
-            width: 40%;
+            width: 100%;
+        }
+        .colon {
+            text-align: center;
         }
         .total-section {
             margin-top: 15px;
@@ -95,20 +98,20 @@
         
         <div class="info-table">
              <div class="label-row">
-                <span class="label">Order ID</span><span>: <span id="order-id"></span></span>
+                <span class="label">Order ID</span><span class="colon">:</span><span id="order-id"></span>
             </div>
             <div class="label-row">
-                <span class="label">Date</span><span>: <span id="date"></span></span>
+                <span class="label">Date</span><span class="colon">:</span><span id="date"></span>  
             </div>
     
             <div class="label-row">
-                <span class="label">Customer Name</span><span>: <span id="customer-name"></span></span>
+                <span class="label">Customer Name</span><span class="colon">:</span><span id="customer-name"></span>
             </div>
             <div class="label-row">
-                <span class="label">Phone</span><span>: <span id="phone"></span></span>
+                <span class="label">Phone</span><span class="colon">:</span><span id="phone"></span>
             </div>
             <div class="label-row">
-                <span class="label">Destination</span><span>: <span id="destination"></span></span>
+                <span class="label">Destination</span><span class="colon">:</span><span id="destination"></span>
             </div>
         </div>
 
@@ -122,12 +125,12 @@
     <script>
       
        const urlParams = new URLSearchParams(window.location.search);
-       const orderId = urlParams.get('orderId') || "";
+       const orderId = urlParams.get('order-id') || "";
        const date = urlParams.get('date') || "";
-       const customerName = urlParams.get('customerName') || "";
+       const customerName = urlParams.get('customer-name') || "";
        const phone = urlParams.get('phone') || "";
        const destination = urlParams.get('destination') || "";
-       const totalCost = urlParams.get('totalCost') || "0";
+       const totalCost = urlParams.get('total-cost') || "0";
        const fileName = urlParams.get('fileName') || "";
 
        document.getElementById('order-id').innerText = orderId;
@@ -135,7 +138,7 @@
        document.getElementById('customer-name').innerText = customerName;
        document.getElementById('phone').innerText = phone;
        document.getElementById('destination').innerText = destination;
-       document.getElementById('total-cost').innerText = "Total Cost: Rp " + totalCost;
+       document.getElementById('total-cost').innerText = totalCost;
 
        if (fileName) document.title = fileName;
 
