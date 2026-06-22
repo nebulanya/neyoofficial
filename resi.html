@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* A6 Size: 100mm x 150mm */
+        @page {
+            size: 100mm 150mm;
+            margin: 5mm;
+        }
+        body {
+            font-family: 'Helvetica', sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            width: 90mm; /* A6 margin adjustment */
+        }
+        .container {
+            width: 100%;
+        }
+        .header {
+            text-align: left;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .brand {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+        }
+        .invoice-title {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .info-table td {
+            padding: 3px 0;
+            vertical-align: top;
+        }
+        .label {
+            font-weight: bold;
+            width: 40%;
+        }
+        .total-section {
+            margin-top: 15px;
+            border-top: 1px dashed #333;
+            padding-top: 5px;
+            text-align: right;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 10px;
+        }
+        .button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .printer-friendly .button .button-group {
+            display: none;
+        }
+    
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">Neyo</div>
+            <div class="invoice-title">Invoice</div>
+        </div>
+        
+        <table class="info-table">
+             <tr>
+                <td class="label" id="order-id">Order ID</td>
+                <td>: 22 Juni 2026</td>
+            </tr>
+            <tr>
+                <td class="label" id="date">Date</td>
+                <td>: 22 Juni 2026</td>
+            </tr>
+            <tr>
+                <td class="label" id="customer-name">Customer Name</td>
+                <td>: Budi Santoso</td>
+            </tr>
+            <tr>
+                <td class="label" id="phone">Phone</td>
+                <td>: 08123456789</td>
+            </tr>
+            <tr>
+                <td class="label" id="destination">Destination</td>
+                <td>: Jl. Merdeka No. 1, Jakarta</td>
+            </tr>
+        </table>
+
+        <div class="total-section" id="total-cost">
+            Total Cost: Rp 150.000
+        </div>
+        <div class="button-group">
+            <button class="button" onclick="window.print()">Invoice</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+
+       const urlParams = new URLSearchParams(window.location.search);
+       const orderId = urlParams.get('order-id') || "N/A";
+       const date = urlParams.get('date') || "N/A";
+       const customerName = urlParams.get('customer-name') || "N/A";
+       const phone = urlParams.get('phone') || "N/A";
+       const destination = urlParams.get('destination') || "N/A";
+       const totalCost = urlParams.get('total-cost') || "0";
+       const fileName = urlParams.get('fileName') || "";
+
+       document.getElementById('order-id').innerText = orderId;
+       document.getElementById('date').innerText = date;
+       document.getElementById('customer-name').innerText = customerName;
+       document.getElementById('phone').innerText = phone;
+       document.getElementById('destination').innerText = destination;
+       document.getElementById('total-cost').innerText = "Total Cost: Rp " + totalCost;
+
+       if (fileName) document.title = fileName;
+
+    </script>
+
+</body>
+</html>
