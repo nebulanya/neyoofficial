@@ -46,7 +46,7 @@
 
         .label-row {
             display: grid;
-            grid-template-columns: 100px 5px 1fr; /* 90px untuk lebar label, 5px untuk titik dua, sisanya untuk konten */
+            grid-template-columns: 100px 15px 1fr; /* 90px untuk lebar label, 5px untuk titik dua, sisanya untuk konten */
             align-items: start;
             padding: 3px 0;
         }
@@ -85,6 +85,12 @@
         .printer-friendly .button .button-group {
             display: none;
         }
+
+         @media print {
+            .button-group {
+                display: none;
+            }
+        }
     
         
     </style>
@@ -115,8 +121,10 @@
             </div>
         </div>
 
-        <div class="total-section" id="total-cost">
+       <div class="total-section">
+            Total Cost <span style="gap: 1%;">: </span><span id="total-cost"></span>
         </div>
+        
         <div class="button-group">
             <button class="button" onclick="window.print()">Invoice</button>
         </div>
