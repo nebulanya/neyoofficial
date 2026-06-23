@@ -60,11 +60,6 @@
             text-align: center;
         }
        
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 10px;
-        }
         .button {
             display: block;
             margin: 20px auto;
@@ -137,6 +132,10 @@
                 margin-bottom: 2px;
             }
         }
+        .line {
+            border-top: 1px dashed #333;
+            margin: 10px 0;
+        }
     
         
     </style>
@@ -166,7 +165,7 @@
                 <span class="label">Destination</span><span class="colon">:</span><span id="destination"></span>
             </div>
         </div>
-
+<div class="line"></div>
         
         <div class="button-group">
             <button class="button" onclick="window.print()">Invoice</button>
