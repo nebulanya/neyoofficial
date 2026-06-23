@@ -2,6 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         /* A6 Size: 100mm x 150mm */
         @page {
@@ -85,27 +87,56 @@
         }
 
         /* Pengaturan untuk perangkat mobile dengan lebar maks 732px */
-@media screen and (max-width: 732px) {
-    body {
-        width: 100%; /* Agar full di layar mobile */
-        padding: 5px;
-    }
-    
-    .container {
-        width: 95%; /* Sedikit margin di sisi kanan kiri */
-        margin: 0 auto;
-    }
+/* MOBILE */
+        @media screen and (max-width: 732px) {
 
-    .label-row {
-        /* Opsional: memperkecil lebar label di mobile agar tidak terpotong */
-        grid-template-columns: 80px 10px 1fr; 
-        font-size: 11px; /* Sedikit memperkecil font agar muat */
-    }
+            body {
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+                font-size: 13px;
+            }
 
-    .brand {
-        font-size: 16px;
-    }
-}
+            .container {
+                width: 100%;
+            }
+
+            .brand {
+                font-size: 20px;
+            }
+
+            .invoice-title {
+                font-size: 15px;
+            }
+
+            .label-row {
+                grid-template-columns: 85px 10px 1fr;
+                font-size: 13px;
+            }
+
+            .button {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+
+        /* Extra kecil (Android lama / iPhone SE) */
+        @media screen and (max-width: 480px) {
+
+            .label-row {
+                grid-template-columns: 1fr;
+                gap: 2px;
+                padding: 6px 0;
+            }
+
+            .colon {
+                display: none;
+            }
+
+            .label {
+                margin-bottom: 2px;
+            }
+        }
     
         
     </style>
