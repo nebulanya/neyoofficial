@@ -68,6 +68,7 @@
 
             .line {
                 border-top: 1px dashed #333;
+                border-bottom: 1px dashed #333;
                 margin: 10px 0;
             }
        
@@ -158,9 +159,7 @@
 
         </div>
 
-        <div class="total-section">
-            Total Cost <span style="gap: 1%;">: </span><span id="total-cost"></span>
-        </div>
+        
         <div class="button-group">
             <button class="button" onclick="window.print()">Order Receipt</button>
         </div>
@@ -174,7 +173,6 @@
        const customerName = urlParams.get('customerName') || "";
        const phone = urlParams.get('phone') || "";
        const destination = urlParams.get('destination') || "";
-       const totalCost = urlParams.get('totalCost') || "0";
        const neyoContact = urlParams.get('neyoContact') || "";
        const fileName = urlParams.get('fileName') || "";
        const skuList = (urlParams.get("skuList") || "").split("|");
@@ -193,7 +191,6 @@ document.getElementById("sku-id").innerHTML = hasil;
        document.getElementById('customer-name').innerText = customerName;
        document.getElementById('phone').innerText = phone;
        document.getElementById('destination').innerText = destination;
-       document.getElementById('total-cost').innerText = totalCost;
        document.getElementById('neyo-contact').innerText = neyoContact;
 
        if (fileName) document.title = fileName;
