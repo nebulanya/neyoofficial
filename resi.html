@@ -2,8 +2,6 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
         /* A6 Size: 100mm x 150mm */
         @page {
@@ -35,7 +33,6 @@
         }
         .invoice-title {
             font-size: 14px;
-            text-transform: uppercase;
         }
         .info-table {
             width: 100%;
@@ -48,7 +45,7 @@
 
         .label-row {
             display: grid;
-            grid-template-columns: 100px 15px 1fr; /* 90px untuk lebar label, 5px untuk titik dua, sisanya untuk konten */
+            grid-template-columns: 100px 15px 1fr; /* 90px untuk lebar label, 20px untuk titik dua, sisanya untuk konten */
             align-items: start;
             padding: 3px 0;
         }
@@ -59,6 +56,20 @@
         .colon {
             text-align: center;
         }
+        .total-section {
+            margin-top: 15px;
+            border-top: 1px dashed #333;
+            padding-top: 5px;
+            text-align: right;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+            .line {
+                border-top: 1px dashed #333;
+                margin: 10px 0;
+            }
        
         .button {
             display: block;
@@ -75,68 +86,34 @@
             display: none;
         }
 
-         @media print {
+        @media print {
             .button-group {
                 display: none;
             }
         }
-
-        /* Pengaturan untuk perangkat mobile dengan lebar maks 732px */
-/* MOBILE */
-        @media screen and (max-width: 732px) {
-
-            body {
-                width: 100%;
-                max-width: 100%;
-                padding: 10px;
-                font-size: 13px;
-            }
-
-            .container {
-                width: 100%;
-            }
-
-            .brand {
-                font-size: 20px;
-            }
-
-            .invoice-title {
-                font-size: 15px;
-            }
-
-            .label-row {
-                grid-template-columns: 85px 10px 1fr;
-                font-size: 13px;
-            }
-
-            .button {
-                width: 100%;
-                margin-top: 20px;
-            }
-        }
-
-        /* Extra kecil (Android lama / iPhone SE) */
-        @media screen and (max-width: 480px) {
-
-            .label-row {
-                grid-template-columns: 1fr;
-                gap: 2px;
-                padding: 6px 0;
-            }
-
-            .colon {
-                display: none;
-            }
-
-            .label {
-                margin-bottom: 2px;
-            }
-        }
-        .line {
-            border-top: 1px dashed #333;
-            margin: 10px 0;
-        }
     
+        /* Pengaturan untuk perangkat mobile dengan lebar maks 732px */
+@media screen and (max-width: 732px) {
+    body {
+        width: 100%; /* Agar full di layar mobile */
+        padding: 5px;
+    }
+    
+    .container {
+        width: 95%; /* Sedikit margin di sisi kanan kiri */
+        margin: 0 auto;
+    }
+
+    .label-row {
+        /* Opsional: memperkecil lebar label di mobile agar tidak terpotong */
+        grid-template-columns: 80px 10px 1fr; 
+        font-size: 11px; /* Sedikit memperkecil font agar muat */
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+}
         
     </style>
 </head>
@@ -144,9 +121,10 @@
     <div class="container">
         <div class="header">
             <div class="brand">Neyo</div>
-            <div class="invoice-title">Invoice</div>
+            <div class="invoice-title">Order Receipt</div>
         </div>
         
+
         <div class="info-table">
              <div class="label-row">
                 <span class="label">Order ID</span><span class="colon">:</span><span id="order-id"></span>
@@ -165,10 +143,26 @@
                 <span class="label">Destination</span><span class="colon">:</span><span id="destination"></span>
             </div>
         </div>
-<div class="line"></div>
-        
+
+        <div class="line">
+
+            <div class="info-table">
+             <div class="label-row">
+                <span class="label">SKU</span><span class="colon">:</span><span id="sku-id"></span>
+            </div>
+
+            <div class="label-row">
+                <span class="label">Neyo Contact</span><span class="colon">:</span><span id="neyo-contact"></span>
+            </div>
+
+
+        </div>
+
+        <div class="total-section">
+            Total Cost <span style="gap: 1%;">: </span><span id="total-cost"></span>
+        </div>
         <div class="button-group">
-            <button class="button" onclick="window.print()">Invoice</button>
+            <button class="button" onclick="window.print()">Order Receipt</button>
         </div>
     </div>
 
@@ -180,13 +174,28 @@
        const customerName = urlParams.get('customerName') || "";
        const phone = urlParams.get('phone') || "";
        const destination = urlParams.get('destination') || "";
+       const totalCost = urlParams.get('totalCost') || "0";
+       const neyoContact = urlParams.get('neyoContact') || "";
        const fileName = urlParams.get('fileName') || "";
+       const skuList = (urlParams.get("skuList") || "").split("|");
+       const qtyList = (urlParams.get("qtyList") || "").split("|");
+
+       let hasil = "";
+
+       for (let i = 0; i < skuList.length; i++) {
+       hasil += `${skuList[i]} | ${qtyList[i]} pcs<br>`;
+       }
+
+document.getElementById("sku-id").innerHTML = hasil;
 
        document.getElementById('order-id').innerText = orderId;
+       document.getElementById('sku-id').innerText = skuId;
        document.getElementById('date').innerText = date;
        document.getElementById('customer-name').innerText = customerName;
        document.getElementById('phone').innerText = phone;
        document.getElementById('destination').innerText = destination;
+       document.getElementById('total-cost').innerText = totalCost;
+       document.getElementById('neyo-contact').innerText = neyoContact;
 
        if (fileName) document.title = fileName;
 
