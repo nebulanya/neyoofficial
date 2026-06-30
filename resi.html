@@ -143,6 +143,9 @@
             <div class="label-row">
                 <span class="label">Destination</span><span class="colon">:</span><span id="destination"></span>
             </div>
+             <div class="label-row">
+                <span class="label">Delivery</span><span class="colon">:</span><span id="delivery"></span>
+            </div>
         </div>
 
         <div class="line">
@@ -173,6 +176,7 @@
        const customerName = urlParams.get('customerName') || "";
        const phone = urlParams.get('phone') || "";
        const destination = urlParams.get('destination') || "";
+       const delivery = urlParams.get('delivery') || ""; 
        const neyoContact = urlParams.get('neyoContact') || "";
        const fileName = urlParams.get('fileName') || "";
        const skuList = (urlParams.get("skuList") || "").split("|");
@@ -191,6 +195,7 @@ document.getElementById("sku-id").innerHTML = hasil;
        document.getElementById('customer-name').innerText = customerName;
        document.getElementById('phone').innerText = phone;
        document.getElementById('destination').innerText = destination;
+       document.getElementById('delivery').innerText = delivery;
        document.getElementById('neyo-contact').innerText = neyoContact;
 
        if (fileName) document.title = fileName;
