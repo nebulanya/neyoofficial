@@ -1,470 +1,1689 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/webp" href="assets/neyoicon.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Neyo Official</title>
+
+    <link rel="icon" type="image/webp" href="assets/neyoicon.webp">
+
+    <!-- CSS akan dimasukkan pada Tahap 2 -->
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background: #000; color: #fff; overflow-x: hidden; }
 
-        .logo{
-    font-size:1.5rem;
-    font-weight:700;
-    letter-spacing:2px;
-    color:#fff;
+        /* ================================
+   RESET
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-        /* Navbar */
-        nav { 
-            position: fixed; top: 0; width: 100%; padding: 20px 10%; 
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.8); z-index: 1000; background:transparent;
-            transition: .4s;
-        }
-
-        nav.scrolled{
-    background:rgba(0,0,0,.8);
-    backdrop-filter:blur(12px);
+html{
+    scroll-behavior:smooth;
 }
 
-        nav ul { display: flex; list-style: none; }
-        nav ul li { margin-left: 20px; }
-        
-        nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 300;
-    position: relative;
-    letter-spacing: 1px;
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:#ffffff;
+    color:#111;
+    overflow-x:hidden;
+    line-height:1.6;
 }
 
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -6px;
-
-    width: 0;
-    height: 1px;
-
-    background: #ffffff;
-
-    transform: translateX(-50%);
-    transition: width .35s ease;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
-        /* Section Styling dengan Parallax */
-        section { 
-            min-height: 100vh; padding: 100px 10%; 
-            display: flex; flex-direction: column; justify-content: center;
-            background-size: cover; background-position: center;
-            position: relative; background-repeat: no-repeat; transform:translate3d(0,0,0);
-        }
-
-        #home{
-    position:relative;
-    overflow:hidden;
-}
-
-.parallax-bg{
-    position:absolute;
-    inset:0;
-
-    background-image:url('assets/Homescreen.webp');
-    background-size:cover;
-    background-position:center;
-
-    transform:translate3d(0,0,0);
-    z-index: 0;
-}
-
-        /* Background gelap (opacity) */
-        section::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Efek gelap */
-            z-index: 1;
-        }
-
-        .content { position: relative; z-index: 2; }
-
-        .shop-button{
-margin-top:25px;
-padding:14px 28px;
-border:none;border-radius:40px;
-cursor:pointer;
-background:#233747;color:#fff;
-transition:.3s;
-}
-.shop-button:hover{transform:translateY(-4px)}
-
-        /* Animasi */
-        .hidden { opacity: 0; transition: all 1.5s ease-out; }
-        .fade-in-left { transform: translateX(-100px); }
-        .fade-in-right { transform: translateX(100px); }
-        .fade-in-up { transform: translateY(100px); }
-        .show { opacity: 1; transform: translate(0); }
-
-        h2 { font-size: 3rem; margin-bottom: 20px; }
-        p { font-size: 1.2rem; max-width: 600px; }
-
-        /* Background Images */
-        
-        #about { background-image: url('assets/aboutbg.jpg'); }
-        #contact { background-image: url('assets/contactbg.webp'); }
-
-
-        #bestseller{
-    background:#111;
-    height:50vh;
-    padding:120px 10%;
-}
-
-.product-grid{
-    margin-top:50px;
-
-    display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:30px;
-}
-
-.product-card{
-    background:rgba(255,255,255,.05);
-    border-radius:20px;
-    overflow:hidden;
-    backdrop-filter:blur(10px);
-    transition:.4s ease;
-    position:relative;
-}
-
-.product-card.hidden{
-    transition: all 3s cubic-bezier(.22,.61,.36,1);
-}
-
-.product-card:hover{
-    transform:translateY(-10px);
-    opacity:1;
-}
-
-.product-card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
+img{
+    max-width:100%;
     display:block;
-    cursor:pointer;
-    transition:.4s ease;
 }
 
-.product-card:hover img{
-    transform:scale(1.05);
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
-.product-info{
-    padding:20px;
+button{
+    font-family:inherit;
+}
+
+/* ================================
+   CONTAINER
+================================ */
+
+.container{
+    width:min(1200px,90%);
+    margin:auto;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    transition:.35s ease;
+}
+
+.header.scrolled{
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar{
+
+    height:80px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-right:50px;
+
+}
+
+.logo{
+
+    font-size:1.7rem;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:#fff;
+
+    transition:.3s;
+
+    margin-left:60px;
+
+}
+
+.header.scrolled .logo{
+
+    color:#111;
+
+}
+
+.nav-menu{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:35px;
+
+}
+
+.nav-menu a{
+
     position:relative;
-    z-index: 2;
+
+    font-size:15px;
+
+    color:#fff;
+
+    transition:.3s;
+
 }
 
-.product-info h3{
-    margin-bottom:10px;
+.header.scrolled .nav-menu a{
+
+    color:#111;
+
 }
 
-.product-card::before{
+.nav-menu a::after{
+
     content:"";
 
     position:absolute;
-    inset:0;
 
-    background:
-    rgba(0,0,0,.4);
+    left:50%;
+
+    bottom:-6px;
+
+    width:0;
+
+    height:2px;
+
+    background:#111;
+
+    transform:translateX(-50%);
+
+    transition:.35s;
+
+}
+
+.nav-menu a:hover::after,
+
+.nav-menu a.active::after{
+
+    width:100%;
+
+}
+
+/* ================================
+   HAMBURGER
+================================ */
+
+.menu-toggle{
+
+    margin-right:-60px;
+
+    display:none;
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:1200;
+
+}
+
+.menu-toggle span{
+
+    position:absolute;
+
+    left:10px;
+
+    width:26px;
+
+    height:2px;
+
+    background:#fff;
+
+    transition:.35s;
+
+}
+
+.header.scrolled .menu-toggle span{
+
+    background:#111;
+
+}
+
+.menu-toggle span:nth-child(1){
+
+    top:14px;
+
+}
+
+.menu-toggle span:nth-child(2){
+
+    top:22px;
+
+}
+
+.menu-toggle span:nth-child(3){
+
+    top:30px;
+
+}
+
+.menu-toggle.active span:nth-child(1){
+
+    transform:rotate(45deg);
+
+    top:22px;
+
+}
+
+.menu-toggle.active span:nth-child(2){
 
     opacity:0;
 
-    transition:.3s;
 }
 
-.product-card:hover::before{
+.menu-toggle.active span:nth-child(3){
+
+    transform:rotate(-45deg);
+
+    top:22px;
+
+}
+
+/* ================================
+   OVERLAY
+================================ */
+
+.menu-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:900;
+
+}
+
+.menu-overlay.show{
+
     opacity:1;
+
+    visibility:visible;
+
 }
 
+/* ================================
+   SECTION
+================================ */
 
-.footer{
-    background:#050505;
-    padding:80px 10% 30px;
-    border-top:1px solid rgba(255,255,255,.1);
-     background:
-    linear-gradient(
-        to top,
-        #050505,
-        #111
-    );
+section{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:120px 0;
+
 }
 
-.footer-container{
-    display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
+/* ================================
+   HERO
+================================ */
 
-    gap:40px;
-}
+.hero-section{
 
-.footer-col h3{
-    font-size:2rem;
-    margin-bottom:15px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-}
+    overflow:hidden;
 
-.footer-col h4{
-    margin-bottom:20px;
-    font-size:1.1rem;
-}
-
-.footer-col p{
-    color:#aaa;
-    line-height:1.8;
-    font-size:.95rem;
-}
-
-.footer-col a{
-    display:block;
-    color:#aaa;
-    text-decoration:none;
-    margin-bottom:12px;
-    transition:.3s;
-}
-
-.footer-col a:hover{
     color:#fff;
-    transform:translateX(5px);
+
 }
 
-.social-links a{
-    display:block;
+.hero-background{
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:url("assets/Homescreen.webp");
+
+    background-size:cover;
+
+    background-position:center;
+
+    z-index:-2;
+
+    will-change:transform;
+
 }
 
-.footer-bottom{
+.hero-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    z-index:-1;
+
+}
+
+.hero-content{
+
+    max-width:650px;
+
+}
+
+.hero-content h1{
+
+    font-size:4rem;
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+
+}
+
+.hero-content p{
+
+    font-size:1.2rem;
+
+    opacity:.95;
+
+    margin-bottom:35px;
+
+}
+
+/* ================================
+   BUTTON
+================================ */
+
+.shop-button{
+
+    padding:16px 34px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#233747;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.35s;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.shop-button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 18px 35px rgba(35,55,71,.35);
+
+}
+
+/* ================================
+   ABOUT
+================================ */
+
+.about-section{
+
+    background-image:url("assets/aboutbg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:#fff;
+
+}
+
+.about-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.50);
+
+}
+
+.about-section .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ================================
+   BEST SELLER
+================================ */
+
+.bestseller-section{
+
+    background:#ffffff;
+
+}
+
+.section-header{
+
     text-align:center;
-    margin-top:50px;
-    padding-top:25px;
 
-    border-top:
-    1px solid rgba(255,255,255,.08);
+    margin-bottom:60px;
 
-    color:#777;
-    font-size:.9rem;
 }
 
-@media(max-width:768px){
+.section-header h2{
+
+    font-size:3rem;
+
+    margin-bottom:15px;
+
+}
+
+.section-header p{
+
+    color:#666;
+
+    max-width:650px;
+
+    margin:auto;
+
+}
+
+/* ================================
+   CONTACT
+================================ */
+
+.contact-section{
+
+    background-image:url("assets/contactbg.webp");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:#fff;
+
+}
+
+.contact-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.50);
+
+}
+
+.contact-section .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.section-content h2{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+.section-content p{
+
+    max-width:700px;
+
+    margin-bottom:12px;
+
+}
+
+/* ==========================================
+   PRODUCT GRID
+========================================== */
 
 .product-grid{
-    grid-template-columns:1fr;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:32px;
+}
+
+.product-card{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+    transition:
+    transform .45s ease,
+    box-shadow .45s ease;
+
+    will-change:transform;
+
+}
+
+.product-card:hover{
+
+    transform:
+    translateY(-12px);
+
+    box-shadow:
+    0 30px 60px rgba(0,0,0,.15);
+
 }
 
 .product-card img{
-    height:220px;
+
+    width:100%;
+
+    height:270px;
+
+    object-fit:cover;
+
+    transition:
+    transform .6s ease;
+
 }
 
-.footer-container{
-    grid-template-columns:1fr;
+.product-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+.product-info{
+
+    padding:24px;
+
+}
+
+.product-info h3{
+
+    font-size:1.25rem;
+
+    margin-bottom:10px;
+
+    color:#111;
+
+}
+
+.product-info p{
+
+    color:#666;
+
+    line-height:1.7;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer{
+
+    background:#fff;
+
+    border-top:1px solid #ececec;
+
+    padding:80px 0 25px;
+
+}
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:45px;
+
+}
+
+.footer h3{
+
+    font-size:2rem;
+
+    margin-bottom:18px;
+
+}
+
+.footer h4{
+
+    margin-bottom:18px;
+
+}
+
+.footer p{
+
+    color:#666;
+
+    margin-bottom:10px;
+
+}
+
+.footer a{
+
+    display:block;
+
+    color:#666;
+
+    margin-bottom:12px;
+
+    transition:.3s;
+
+}
+
+.footer a:hover{
+
+    color:#111;
+
+    transform:translateX(6px);
+
+}
+
+.copyright{
+
+    margin-top:55px;
+
     text-align:center;
-}
+
+    border-top:1px solid #eee;
+
+    padding-top:24px;
+
+    color:#888;
 
 }
 
+/* ==========================================
+   REVEAL ANIMATION
+========================================== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(70px);
+
+    transition:
+    opacity .9s ease,
+    transform .9s ease;
+
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================
+   RIPPLE EFFECT
+========================================== */
+
+.shop-button::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:20px;
+
+    height:20px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.35);
+
+    transform:scale(0);
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.shop-button:active::after{
+
+    animation:ripple .6s ease;
+
+}
+
+@keyframes ripple{
+
+    from{
+
+        transform:scale(0);
+
+        opacity:.8;
+
+    }
+
+    to{
+
+        transform:scale(18);
+
+        opacity:0;
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:900px){
+
+.logo{
+
+    margin-left:5px;
+}
+
+.product-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.footer-grid{
+
+    grid-template-columns:1fr;
+
+    text-align:center;
+
+}
+
+.footer a:hover{
+
+    transform:none;
+
+}
+
+.hero-content h1{
+
+    font-size:2.8rem;
+
+}
+
+.section-header h2,
+.section-content h2{
+
+    font-size:2.3rem;
+
+}
+
+.menu-toggle{
+
+    display:block;
+
+}
+
+.nav-menu{
+
+    position:fixed;
+
+    top:0;
+
+    right:-100%;
+
+    width:290px;
+
+    height:100vh;
+
+    background:
+    rgba(255,255,255,.96);
+
+    backdrop-filter:blur(18px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:32px;
+
+    transition:.45s ease;
+
+    box-shadow:
+    -15px 0 40px rgba(0,0,0,.15);
+
+    z-index:1100;
+
+}
+
+.nav-menu.show{
+
+    right:0;
+
+}
+
+.nav-menu a{
+
+    color:#111 !important;
+
+    font-size:1.1rem;
+
+}
+
+.logo{
+
+    font-size:1.5rem;
+
+}
+
+.header{
+
+    padding:0 18px;
+
+}
+
+.hero-content{
+
+    text-align:center;
+
+    margin:auto;
+
+}
+
+.hero-content p{
+
+    font-size:1rem;
+
+}
+
+.shop-button{
+
+    width:100%;
+
+    max-width:320px;
+
+}
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media(max-width:480px){
+
+section{
+
+    padding:95px 0;
+
+}
+
+.hero-content h1{
+
+    font-size:2.2rem;
+
+}
+
+.section-header h2,
+.section-content h2{
+
+    font-size:1.9rem;
+
+}
+
+.product-card img{
+
+    height:220px;
+
+}
+
+.container{
+
+    width:92%;
+
+}
+
+}
+
+/* ==========================================
+   DESKTOP ANIMATION
+========================================== */
+
+@media(min-width:901px){
+
+.product-card{
+
+    opacity:.98;
+
+}
+
+.product-card:hover{
+
+    transform:
+    translateY(-12px)
+    scale(1.02);
+
+}
+
+}
+
+/* ==========================================
+   SMOOTH SCROLL FIX
+========================================== */
+
+body.menu-open{
+
+    overflow:hidden;
+
+}
 
     </style>
+
 </head>
+
 <body>
 
-    <nav>
-        <div class="logo">Neyo</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#bestseller">Best Seller</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="https://neyoofficial.glide.page/dl/f57b41/">Store</a></li>
-        </ul>
-    </nav>
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
 
-    <section id="home">
-      <div class="parallax-bg"></div>
-        <div class="content hidden fade-in-up">
-            <h1>Illuminate your appearance</h1>
-            <p>Find the best collection of shoes and sandals for your needs</p>
-            <button class="shop-button" id="shopBtn"
-data-url="https://neyoofficial.glide.page/dl/f57b41">
-Visit Our Store
-</button>
+    <header class="header">
+
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                Neyo
+            </a>
+
+            <!-- Hamburger -->
+            <button class="menu-toggle" id="menuToggle">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+            <!-- Navigation -->
+            <ul class="nav-menu" id="navMenu">
+
+                <li>
+                    <a href="#home" class="nav-link">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#about" class="nav-link">
+                        About Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#bestseller" class="nav-link">
+                        Best Seller
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact" class="nav-link">
+                        Contact
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://neyoofficial.glide.page/dl/f57b41/">
+                        Store
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <!-- Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+
+
+
+
+    <!-- ========================= -->
+    <!-- HOME -->
+    <!-- ========================= -->
+
+    <section id="home" class="hero-section">
+
+        <div class="hero-background"></div>
+
+        <div class="container">
+
+            <div class="hero-content reveal">
+
+                <h1>
+                    Illuminate Your Appearance
+                </h1>
+
+                <p>
+
+                    Find the best collection of shoes and sandals
+                    for your daily activities.
+
+                </p>
+
+                <button
+                    class="shop-button"
+                    id="shopBtn"
+                    data-url="https://neyoofficial.glide.page/dl/f57b41">
+
+                    Visit Our Store
+
+                </button>
+
+            </div>
+
         </div>
-        
+
     </section>
 
-    <section id="about">
-        <div>
-            <h1 class="content hidden fade-in-left">About Us</h1>
-            <p class="content hidden fade-in-right">We provide high-quality footwear solutions for men and women</p>
-            <p class="content hidden fade-in-left">that you can trust for comfort and style</p>
+
+
+
+
+
+    <!-- ========================= -->
+    <!-- ABOUT -->
+    <!-- ========================= -->
+
+    <section id="about" class="about-section">
+
+        <div class="container">
+
+            <div class="section-content reveal">
+
+                <h2>
+
+                    About Us
+
+                </h2>
+
+                <p>
+
+                    We provide high-quality footwear solutions
+                    designed for comfort, durability,
+                    and everyday style.
+
+                </p>
+
+            </div>
+
         </div>
+
     </section>
 
-    <section id="bestseller">
-  <div class="content">
 
-    <h1 class="content hidden fade-in-left">Best Seller</h1>
-    <p class="content hidden fade-in-right">Our most popular products loved by customers.</p>
 
-    <div class="product-grid">
 
-      <div class="product-card hidden fade-in-left" 
-          onclick="window.location.href='https://neyoofficial.glide.page/dl/f57b41/s/2a6df5/r/Yehj4.BiTtayf7Yy0bJWpw'">
-        <img src="assets/SST OLIVE.webp">
 
-        <div class="product-info">
-          <h3>Men's Mountain Sandal</h3>
-          <p>Comfortable mountain sandal.</p>
+
+    <!-- ========================= -->
+    <!-- BEST SELLER -->
+    <!-- ========================= -->
+
+    <section id="bestseller" class="bestseller-section">
+
+        <div class="container">
+
+            <div class="section-header reveal">
+
+                <h2>
+
+                    Best Seller
+
+                </h2>
+
+                <p>
+
+                    Our most popular products loved by customers.
+
+                </p>
+
+            </div>
+
+            <div class="product-grid">
+
+                <!-- Product 1 -->
+
+                <article
+                    class="product-card reveal"
+                    onclick="window.location.href='https://neyoofficial.glide.page/dl/f57b41/s/2a6df5/r/Yehj4.BiTtayf7Yy0bJWpw'">
+
+                    <img
+                        src="assets/SST OLIVE.webp"
+                        alt="Mountain Sandal">
+
+                    <div class="product-info">
+
+                        <h3>
+
+                            Men's Mountain Sandal
+
+                        </h3>
+
+                        <p>
+
+                            Comfortable mountain sandal.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+
+
+                <!-- Product 2 -->
+
+                <article
+                    class="product-card reveal"
+                    onclick="window.location.href='https://neyoofficial.glide.page/dl/f57b41/s/2a6df5/r/nGVihCjGTpOQc5uBt53Q6w'">
+
+                    <img
+                        src="assets/VIOLA CREAM.webp"
+                        alt="Women's Sneakers">
+
+                    <div class="product-info">
+
+                        <h3>
+
+                            Women's Sneakers
+
+                        </h3>
+
+                        <p>
+
+                            Perfect for everyday wear.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+
+
+
+
+                <!-- Product 3 -->
+
+                <article
+                    class="product-card reveal"
+                    onclick="window.location.href='https://neyoofficial.glide.page/dl/f57b41/s/2a6df5/r/npcgpUavQES-o0SYVSb7iQ'">
+
+                    <img
+                        src="assets/SBS ARMY.webp"
+                        alt="Safety Boots">
+
+                    <div class="product-info">
+
+                        <h3>
+
+                            Men's Safety Boots
+
+                        </h3>
+
+                        <p>
+
+                            Built for performance and protection.
+
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
 
         </div>
-      </div>
 
-      <div class="product-card hidden fade-in-up"
-          onclick="window.location.href='https://neyoofficial.glide.page/dl/f57b41/s/2a6df5/r/nGVihCjGTpOQc5uBt53Q6w'">
-        <img src="assets/VIOLA CREAM.webp">
-
-        <div class="product-info">
-          <h3>Women's Sneakers</h3>
-          <p>Perfect for everyday wear.</p>
-
-        </div>
-      </div>
-
-      <div class="product-card hidden fade-in-right"
-          onclick="window.location.href='https://neyoofficial.glide.page/dl/f57b41/s/2a6df5/r/npcgpUavQES-o0SYVSb7iQ'">
-        <img src="assets/SBS ARMY.webp">
-
-        <div class="product-info">
-          <h3>Men's Safety Boots</h3>
-          <p>Built for performance and protection.</p>
-
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-   
-    <section id="contact">
-        <div class="content">
-            <h1 class="content hidden fade-in-left">Contact Us</h1>
-            <p class="content hidden fade-in-right">Reach out to us at +62 812 3456 7890</p>
-            <p class="content hidden fade-in-left">Email us at neyo@gmail.com</p>
-            <br>
-            <p class="content hidden fade-in-right">Feel free to contact us anytime. We're here to help you with any questions or feedback you may have.</p>
-
-        </div>
     </section>
+
+
+
+
+
+
+
+    <!-- ========================= -->
+    <!-- CONTACT -->
+    <!-- ========================= -->
+
+    <section id="contact" class="contact-section">
+
+        <div class="container">
+
+            <div class="section-content reveal">
+
+                <h2>
+
+                    Contact Us
+
+                </h2>
+
+                <p>
+
+                    +62 812 3456 7890
+
+                </p>
+
+                <p>
+
+                    neyo@gmail.com
+
+                </p>
+
+                <p>
+
+                    Feel free to contact us anytime.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
 
     <footer class="footer">
 
-    <div class="footer-container">
+        <div class="container footer-grid">
 
-        <div class="footer-col">
-            <h2>Neyo</h2>
-            <p>
-                Premium footwear designed for comfort,
-                durability, and everyday style.
-            </p>
-        </div>
+            <div>
 
-        <div class="footer-col">
-            <h4>Quick Links</h4>
+                <h3>
 
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#bestseller">Best Seller</a>
-            <a href="#contact">Contact</a>
-        </div>
+                    Neyo
 
-        <div class="footer-col">
-            <h4>Contact</h4>
+                </h3>
 
-            <p>+62 812 3456 7890</p>
-            <p>neyo@gmail.com</p>
-            <p>Indonesia</p>
-        </div>
+                <p>
 
-        <div class="footer-col">
-            <h4>Follow Us</h4>
+                    Premium footwear designed
+                    for comfort and style.
 
-            <div class="social-links">
+                </p>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    Quick Links
+
+                </h4>
+
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#bestseller">Best Seller</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    Contact
+
+                </h4>
+
+                <p>
+
+                    Indonesia
+
+                </p>
+
+                <p>
+
+                    +62 812 3456 7890
+
+                </p>
+
+                <p>
+
+                    neyo@gmail.com
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    Follow Us
+
+                </h4>
 
                 <a href="#">Instagram</a>
-
                 <a href="#">Facebook</a>
-
                 <a href="#">TikTok</a>
 
             </div>
+
         </div>
 
-    </div>
+        <div class="copyright">
 
-    <div class="footer-bottom">
-        © 2026 Neyo Official. All Rights Reserved.
-    </div>
+            © 2026 Neyo Official.
+            All Rights Reserved.
 
-</footer>
+        </div>
 
+    </footer>
+
+
+
+
+
+    <!-- Javascript akan dimasukkan pada Tahap 3 -->
     <script>
 
-      const bg = document.querySelector('.parallax-bg');
-      const nav = document.querySelector('nav');
+        // ===========================================
+// ELEMENTS
+// ===========================================
 
-window.addEventListener('scroll', () => {
+const header = document.querySelector(".header");
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+const menuOverlay = document.getElementById("menuOverlay");
+const navLinks = document.querySelectorAll(".nav-link");
+const shopBtn = document.getElementById("shopBtn");
+const heroBg = document.querySelector(".hero-background");
+const revealElements = document.querySelectorAll(".reveal");
 
-  nav.classList.toggle(
-        'scrolled',
-        window.scrollY > 50
-    );
+// ===========================================
+// MOBILE MENU
+// ===========================================
 
-    const offset = window.scrollY * 0.4;
+function openMenu(){
 
-    if(bg){
-  bg.style.transform =
-  `translate3d(0, ${offset}px, 0)`;
+    menuToggle.classList.add("active");
+
+    navMenu.classList.add("show");
+
+    menuOverlay.classList.add("show");
+
+    document.body.classList.add("menu-open");
+
 }
+
+function closeMenu(){
+
+    menuToggle.classList.remove("active");
+
+    navMenu.classList.remove("show");
+
+    menuOverlay.classList.remove("show");
+
+    document.body.classList.remove("menu-open");
+
+}
+
+menuToggle.addEventListener("click",()=>{
+
+    if(navMenu.classList.contains("show")){
+
+        closeMenu();
+
+    }else{
+
+        openMenu();
+
+    }
+
 });
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, { threshold: 0.2 });
+menuOverlay.addEventListener("click",closeMenu);
 
-        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+navLinks.forEach(link=>{
 
-        document.getElementById('shopBtn').onclick=function(){
-const url=this.dataset.url;
-this.style.transform='translateY(-8px)';
-setTimeout(()=>{
-window.location.href = url;
-this.style.transform='';
-},300);
-};
+    link.addEventListener("click",closeMenu);
+
+});
+
+// ===========================================
+// NAVBAR SCROLL
+// ===========================================
+
+function updateNavbar(){
+
+    if(window.scrollY>60){
+
+        header.classList.add("scrolled");
+
+    }else{
+
+        header.classList.remove("scrolled");
+
+    }
+
+}
+
+// ===========================================
+// PARALLAX
+// ===========================================
+
+let latestScroll = 0;
+
+function animate(){
+
+    heroBg.style.transform =
+    `translate3d(0,${latestScroll*0.35}px,0)`;
+
+}
+
+window.addEventListener("scroll",()=>{
+
+    latestScroll = window.scrollY;
+
+    requestAnimationFrame(animate);
+
+},{passive:true});
+
+// ===========================================
+// REVEAL ANIMATION
+// ===========================================
+
+const observer = new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("active");
+
+        }
+
+    });
+
+},{
+    threshold:.15
+});
+
+revealElements.forEach(el=>{
+
+    observer.observe(el);
+
+});
+
+// ===========================================
+// ACTIVE MENU
+// ===========================================
+
+const sections = document.querySelectorAll("section");
+
+function activeMenu(){
+
+    let current="";
+
+    sections.forEach(section=>{
+
+        const top = section.offsetTop-150;
+
+        if(window.scrollY>=top){
+
+            current = section.getAttribute("id");
+
+        }
+
+    });
+
+    navLinks.forEach(link=>{
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href")==="#"+current){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+}
+
+// ===========================================
+// SHOP BUTTON
+// ===========================================
+
+shopBtn.addEventListener("click",()=>{
+
+    shopBtn.style.transform="scale(.96)";
+
+    setTimeout(()=>{
+
+        shopBtn.style.transform="";
+
+        window.location.href = shopBtn.dataset.url;
+
+    },180);
+
+});
+
+// ===========================================
+// SMOOTH SCROLL
+// ===========================================
+
+navLinks.forEach(link=>{
+
+    link.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        const target=document.querySelector(
+            this.getAttribute("href")
+        );
+
+        target.scrollIntoView({
+
+            behavior:"smooth",
+
+            block:"start"
+
+        });
+
+    });
+
+});
+
+// ===========================================
+// PRODUCT CLICK EFFECT
+// ===========================================
+
+document.querySelectorAll(".product-card").forEach(card=>{
+
+    card.addEventListener("mousedown",()=>{
+
+        card.style.transform="scale(.98)";
+
+    });
+
+    card.addEventListener("mouseup",()=>{
+
+        card.style.transform="";
+
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+        card.style.transform="";
+
+    });
+
+});
+
+// ===========================================
+// SCROLL LISTENER
+// ===========================================
+
+window.addEventListener("scroll",()=>{
+
+    updateNavbar();
+
+    activeMenu();
+
+},{passive:true});
+
+// ===========================================
+// PAGE LOAD
+// ===========================================
+
+window.addEventListener("load",()=>{
+
+    updateNavbar();
+
+    activeMenu();
+
+});
 
     </script>
+
 </body>
+
 </html>
